@@ -1,0 +1,14 @@
+ColumnName,Description,DataType
+timestamp,Timestamp of the response,Date
+age,Age group of the respondent,factor
+living_in_zurich,Current living status in Zurich City,factor
+primary_language,Primary language of the respondent,character
+german_skills,German language proficiency,numeric
+study_level,Current level of study,character
+field_of_study,Field of study,character
+knowledge_rating,Self-rated knowledge about Zurich's waste management system,numeric
+recycle_frequency,Frequency of recycling,factor
+system_effectiveness,Perception of the effectiveness of Zurich's waste management system,numeric
+biggest_challenge,Biggest challenge for waste management in Zurich,factor
+improvement_suggestion,Suggestion for the biggest improvement to Zurich's waste management system,factor
+future_info_interest,Interest in receiving more information about waste management initiatives in the future,factor

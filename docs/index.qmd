@@ -23,17 +23,22 @@ csl: apa.csl
 
 # Introduction
 
-This study examines sustainability practices among international and local students in Zurich, focusing on waste reduction, recycling, and reuse. It investigates the relationship between students' knowledge of the waste management system and their recycling behavior. Additionally, the research explores whether German language proficiency influences access to information about waste management. The basis of this study is the formulated research question: How do sustainability practices, such as waste reduction, recycling, and reuse, differ between international students and local Swiss students in Zurich, and is there a difference in their information status about the local waste management system? Crafting this well-defined research question is crucial in academic studies, as it helps in aligning the study's objectives with the expected outcomes [@fandino2019formulatingb].
+This study examines sustainability practices among international and local students in Zurich, focusing on waste reduction, recycling, and reuse. It investigates the relationship between students' knowledge of the waste management system and their recycling behavior. Additionally, the research explores whether German language proficiency influences access to information about waste management. The basis of this study is the formulated research question: How do sustainability practices, such as waste reduction, recycling, and reuse, differ between international students and local Swiss students in Zurich, and is there a difference in their information status about the local waste management system? 
 
 # Methods
 
+Formulating a well-defined research question is crucial in academic studies, as it helps to align the objectives of the study with the expected outcomes [@fandino2019formulatingb]. It sets the basis for the collection of insightful data and should be crafted before the data collection. 
+
 ## Participant Recruitment
 
-Participants for the survey were recruited from among ETH Zurich students. The survey was distributed as a Google Forms link, as a straightforward and rapid communication. This distribution method was selected to maximize response rates by facilitating easy access to the survey on mobile devices. The recruitment approach was informal, depending on students sharing the survey link within their networks, which resulted in an unknown distribution of participants across various fields of study and academic levels.
+Participants for the survey were recruited from among ETH Zurich students. The survey was distributed as a Google Forms link, as a straightforward and rapid communication in order to maximize response rates by facilitating easy access to the survey on mobile devices. The recruitment approach was informal, depending on students sharing the survey link within their networks, which resulted in an unknown distribution of participants across various fields of study and academic levels.
 
 ## Data Collection
 
-The data collection utilized a structured Google Forms survey, designed to be intuitive and quick to complete, accommodating the busy schedules of students. The survey remained open for responses over a two-week period in May 2024. It included a series of both closed and open-ended questions to gather quantitative data and qualitative insights into students’ sustainability practices and perceptions.
+The data collection utilized a structured Google Forms survey, designed to be intuitive and quick to complete, accommodating the busy schedules of students. The Google Forms survey was therefore designed to be completed within approximately one minute encouraging comprehensive and thoughtful responses from the students.
+
+The survey remained open for responses over a two-week period in May 2024. It included a series of both closed and open-ended questions to gather quantitative data and qualitative insights into students’ sustainability practices and perceptions. 
+
 
 ### Survey Questions
 
@@ -50,7 +55,7 @@ Responses were exported from Google Forms and analyzed using descriptive statist
 
 # Results
 
-Let's dive into the results of the study, which are visually represented through a series of charts and tables. Each visualization and table is directly tied to the insights discussed below, providing a clear, data-driven foundation for the findings on student sustainability practices at ETH Zurich. The visualizations in this section were created using ggplot2, a powerful tool for data analysis and graphical representation, described extensively in Wickham's (2016) book on the subject [@zotero-80].
+The results of the study are visually represented through a series of charts and tables. Each visualization and table is directly tied to the insights discussed below, providing a clear, data-driven foundation for the findings on student sustainability practices at ETH Zurich. The visualizations in this section were created using ggplot2, a powerful tool for data analysis and graphical representation, described extensively in Wickham's (2016) book on the subject [@zotero-80].
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
@@ -68,7 +73,7 @@ waste_data <- read_csv("../data/final/waste_survey.csv")
 
 ## Demographics and Knowledge
 
-displays a stacked bar chart that illustrates the proportional responses by student group regarding their self-rated knowledge of Zurich's waste management system. This visualization is crucial for gauging the awareness levels across different student demographics, setting the stage for a deeper analysis into how this awareness translates into practical recycling behaviors.
+@fig-engagement-levels displays a stacked bar graph illustrating the proportional responses by student group regarding their self-rated knowledge of Zurich's waste management system. This visualisation is crucial for measuring awareness levels across different student demographics, setting the stage for a deeper analysis of how this awareness translates into practical recycling behaviours. Respondents were asked to choose from a range of one to five, with one representing very poor knowledge and five representing excellent knowledge. 
 
 ```{r}
 #| label: fig-engagement-levels
@@ -84,7 +89,8 @@ proportion_data <- waste_data %>%
 
 # Convert knowledge_rating to a factor with levels in the desired order
 proportion_data <- proportion_data %>%
-  mutate(knowledge_rating = factor(knowledge_rating, levels = c(1, 2, 3, 4, 5)))
+  mutate(knowledge_rating = factor(knowledge_rating, levels = c(1, 2, 3, 4, 5),
+                                   labels = c("Very Poor", "Poor", "Average", "Good", "Excellent")))
 
 # Plot with reversed stacking order and ensure the proportions are correctly calculated
 ggplot(proportion_data, aes(x = student_group, y = proportion, fill = factor(knowledge_rating))) +
@@ -107,7 +113,7 @@ ggplot(proportion_data, aes(x = student_group, y = proportion, fill = factor(kno
 
 ## Recycling Frequency and Knowledge Correlation
 
-@tbl-group-summary is an overview of the average ratings in recycling frequency and knowledge about the waste management system in zurich. Also the average rating of the perception if the recycling system is effective in zurich as an numerical rating from one as very bad to 5 as excelent.
+The @tbl-group-summary is an overview of the average ratings of recycling frequency and knowledge about the waste management system in Zurich. It also shows the average perception of the effectiveness of the recycling system in Zurich as a numerical rating from 1 as very poor to 5 as excellent.
 
 ```{r}
 #| label: tbl-group-summary
@@ -151,7 +157,7 @@ ggplot(waste_data, aes(x = knowledge_rating, y = recycle_frequency_num, color = 
 
 ## Perceived Challenges and Suggestions
 
-@tbl-summary-challanges summarizes the key challenges in waste management as identified by the students. This quantitative data complements the qualitative insights gathered, illustrating significant areas where Zurich’s waste management system could be enhanced.
+@tbl-summary-challanges summarises the key waste management challenges identified by the students. This quantitative data complements the qualitative insights gathered and illustrates significant areas where Zurich's waste management system could be improved. In this case, the main issue identified by the participants was a lack of public awareness about recycling and waste management.
 
 ```{r}
 #| label: tbl-summary-challanges
@@ -179,6 +185,8 @@ challenges_summary %>%
     suffixing = TRUE
   )
 ```
+
+@tbl-summary-improvements are the selected improvements from a small list of suggestions. The question was originally formulated as an open-ended question, but was changed to a multiple-choice question because it is difficult to come up with your own suggestions and this way it is still easy to see any trends in perceptions. The most popular option is a mix of investment in new technology and business incentives.
 
 ```{r}
 #| label: tbl-summary-improvements
@@ -210,17 +218,17 @@ suggestions_summary %>%
 
 # Discussion
 
-The survey data reveals a complex picture of sustainability practices among ETH Zurich students, highlighting several critical insights into their behaviors and perceptions regarding waste management:
+The survey data reveals a complex picture of sustainability practices among ETH Zurich students, highlighting several critical insights into their behaviors and perceptions regarding waste management: In a first step, the knowledge and awareness of the waste management systems in Zurich are discussed, followed by the effectiveness of the waste management system in a second step before the current challenges and improvements are considered in a third step.
 
 ## Knowledge and Awareness
 
-The survey indicates a generally moderate to high level of awareness about Zurich's waste management system among ETH students, as most rated their knowledge as 3 or higher on a scale of 1 to 5 (@fig-engagement-levels). Theire is no clear difference in perceived knowledge between these student groups. On the one hand the only 5 score answers come from international students but on the other hand locals have a bigger range in 3 & 4 score answers.
+The survey indicates a generally moderate to high level of awareness about Zurich's waste management system among ETH students, as most rated their knowledge as 3 or higher on a scale of 1 to 5 (@fig-engagement-levels). There is no clear difference in perceived knowledge between these student groups. On the one hand the only 5 score answers come from international students but on the other hand locals have a bigger range in 3 & 4 score answers.
 
-This awareness, however, does not always translate into practice, as evidenced by the variability in recycling frequency depicted in the scatter plot @fig-demographic-knowledge . Such a discrepancy suggests that while students are aware, there may be other barriers to effective participation in recycling programs.
+This awareness, however, does not always translate into practice, as evidenced by the variability in recycling frequency depicted in the scatter plot @fig-demographic-knowledge. Such a discrepancy suggests that -while students are aware- there may be other barriers to effective participation in recycling programs.
 
-Still there is a clear visual trend as visualized by the trend line, that higher awareness or knowledge about waste management correlates with an higher recycling frequency. In other words, higher awareness leads to higher engagement in recycle practices.
+Nevertheless, there is a clear visual trend, visualised by the trend line, that higher awareness or knowledge of waste management correlates with higher recycling frequency. In other words, higher awareness leads to higher engagement in recycling practices.
 
-## Effectiveness of the Waste Management System
+## Perception of the Waste Management System
 
 A significant number of students believe that Zurich's waste management system is effective, which is reflected in the relatively high satisfaction scores (3 or above) (@tbl-group-summary). Despite this, many respondents identified specific challenges such as the need for more comprehensive waste sorting facilities and enhanced public education. This feedback points to opportunities for targeted improvements that could increase the system's efficiency and user friendliness (@tbl-summary-improvements).
 
@@ -230,7 +238,7 @@ A recurring theme among the responses was the challenge of ensuring sufficient p
 
 # Conclusion
 
-As demonstrated through the analyses in Figures 1 and 2, as well as Tables 1 and 2, there is a noticeable disconnect between the high awareness of waste management issues among ETH Zurich students and their varying recycling behaviors. These findings, derived from my individual research in the course, underscore the need for targeted educational programs and improved recycling infrastructure. Such efforts are vital in aligning knowledge with action, a key component of fostering sustainable practices in a global engineering context.
+As demonstrated through the analyses in Figures 1 and 2, as well as Tables 1 and 2, there is a noticeable disconnect between the high awareness of waste management issues among ETH Zurich students and their varying recycling behaviors. These findings underscore the need for targeted educational programs and improved recycling infrastructure. Such efforts are vital in aligning knowledge with action, a key component of fostering sustainable practices in a global engineering context.
 
 This study has highlighted several key findings regarding sustainability practices among ETH Zurich students:
 
@@ -241,7 +249,7 @@ This study has highlighted several key findings regarding sustainability practic
 ## Recommendations for Policy Makers
 
 -   **Enhance Educational Programs**: Develop and implement targeted educational campaigns that not only inform but also motivate students to participate actively in sustainability practices.
--   **Increase Accessibility of Recycling Facilities**: Invest in more accessible recycling stations throughout the city, especially in areas frequented by students. Consider the implementation of solutions similar to those in other Swiss cities, like the plastic recycling-trash bags used in St. Gallen.
+-   **Increase Accessibility of Recycling Facilities**: Invest in more accessible recycling stations throughout the city, especially in areas frequented by students.
 -   **Incentivize Recycling Practices**: Explore the introduction of incentive programs that reward sustainable behavior, potentially increasing participation rates among students.
 
 ## Further Research
